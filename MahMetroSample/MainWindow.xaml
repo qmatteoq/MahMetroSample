@@ -1,0 +1,117 @@
+﻿<local:AcrylicWindow x:Class="MahMetroSample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MahMetroSample"
+        xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls" 
+        ShowCloseButton="False"
+        ShowMinButton="False"
+        ShowMaxRestoreButton="False"
+        ShowTitleBar="False"
+        Background="Transparent"
+        AllowsTransparency="True"
+        mc:Ignorable="d"
+        Loaded="AcrylicWindow_Loaded"
+        Title="My IT support" Height="300" Width="800">
+
+
+    <local:AcrylicWindow.Resources>
+        <Style x:Key="TitleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+        </Style>
+
+        <Style x:Key="HeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="28" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+        </Style>
+
+    </local:AcrylicWindow.Resources>
+
+    <TabControl Style="{DynamicResource MahApps.Styles.TabControl.Animated}" Background="Transparent">
+        <TabItem Header="Informations">
+
+            <Grid Margin="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <metro:ProgressRing x:Name="ringLoading"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Grid.Row="0"
+                            Grid.RowSpan="3"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            />
+
+                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock Text="Computer name:" Style="{StaticResource TitleStyle}" />
+                    <TextBlock x:Name="txtComputerName" Margin="12, 0, 0, 0" FontSize="18" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock Text="Ip address:" Style="{StaticResource TitleStyle}" />
+                    <TextBlock x:Name="txtIpAddress" Margin="12, 0, 0, 0" FontSize="18" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock Text="Windows 10 version:" Style="{StaticResource TitleStyle}" />
+                    <TextBlock x:Name="txtWindows10Version" Margin="12, 0, 0, 0" FontSize="18" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                    <metro:ToggleSwitch Content="Enable blur" x:Name="toggleBlur"
+                                Toggled="toggleBlur_Toggled" 
+                                />
+                    <metro:ToggleSwitch Content="Show title bar" x:Name="toggleTitleBar"
+                                Toggled="toggleTitleBar_Toggled" 
+                                />
+                </StackPanel>
+
+                <Button Content="Open support page"
+                        Width="200"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Click="OnOpenSupportPage" Grid.Column="0" Grid.Row="3" />
+
+            </Grid>
+        </TabItem>
+        <TabItem Header="Notifications">
+            <ListView Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+                  x:Name="listNotifications"
+                   Style="{StaticResource MahApps.Styles.ListView.Virtualized}"
+                      Background="Transparent"
+                      BorderBrush="Transparent"
+                  Margin="0, 20, 0, 0">
+                <ListView.Resources>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Margin" Value="1" />
+                    </Style>
+                </ListView.Resources>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{Binding Path=Timestamp}" />
+                            <TextBlock Text="{Binding Path=Title}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </TabItem>
+
+    </TabControl>
+
+
+</local:AcrylicWindow>
